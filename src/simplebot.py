@@ -9,9 +9,6 @@ import imp, inspect
 
 from settings import *
 
-# unused chan_list = ['#ploooooop.test']
-functions = ['join', 'part', 'close', 'plop', 'say']
-
 
 class fafaIrcBot(object):
 
@@ -24,31 +21,6 @@ class fafaIrcBot(object):
     self.canplop = False
 
 
-#  def join(self, mask, channel, message):
-#    channels = message.split()[1:]
-#    for chan in channels:
-#      print "joining %s " % chan
-#      self.s.send("JOIN %s\n" % chan)
-#
-#
-#  def part(self, mask, channel, message):
-#    channels = message.split()[1:]
-#    for chan in channels:
-#      print "leaving %s " % chan
-#      self.s.send("PART %s\n" % chan)
-#
-#
-#  def close(self, mask, channel, message):
-#    self.s.send('QUIT %s\n' % LEAVE_MSG)
-#    self.s.close()
-#    sys.exit(0)
-
-#
-#  def plop(self, args, place, user):
-#    if self.isAdmin(user):
-#      self.canplop = not self.canplop
-#
-#
   def say(self, args, place, user= None):
     print 'PRIVMSG %s :%s\n' % (place, args)
     self.s.send('PRIVMSG %s :%s\n' % (place, args))
@@ -125,20 +97,3 @@ class fafaIrcBot(object):
                         import pdb; pdb.set_trace()
 
 
-            # plop !
-#            low_line= map(string.lower, line)
-#            if (":plop" in low_line or "plop" in low_line) and self.canplop:
-#              self.s.send("PRIVMSG %s :Plop !\n"% line[2])
-#
-#            # can't answer to mp : ask bmf
-#            if  line[2] == NICK:
-#              pass
-#              user = line[0]
-#              place = self.getUserNick(line[0])
-#              if NICK != place:
-#                self.say("ask bmf".split(), place, user= line[0])
-
-
-if __name__ == "__main__":
-  bot = fafaIrcBot()
-  bot.main_loop()
