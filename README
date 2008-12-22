@@ -1,1 +1,37 @@
-it should start soon ...
+
+                                      Simplebot
+
+DESCRIPTION
+-----------
+
+Simplebot is a simple irc bot. It is not supposed to handle many servers,
+basically it connects to QuakeNet.
+Simplebot was made to consider commands as plugins, each module in src/module/
+is supposed to handle a specific command.
+
+
+INSTALLING / USAGE
+------------------
+
+Please see the docs/xqfdocs.html file for more information.
+
+
+AVAILABILITY
+------------
+
+  get source from github:
+  http://github.com/fabriced/simplebot
+  website... maybe someday
+
+
+COPYRIGHT
+---------
+
+XQF is Copyright (C) 2008-2009 Fabrice Decroix <fabrice.decroix@gmail.com>
+
+Copying is allowed under the terms of GNU General Public License.
+See the file COPYING for more details.
+
+----------------------------------------------------------------------
+Fabrice Decroix <fabrice.decroix@gmail.com>
+
