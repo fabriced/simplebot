@@ -1,8 +1,8 @@
 
-HOST = "irc.quakenet.org"
+HOST = ""
 PORT = 6667
-NICK = "pouhic"
-IDENT = "pas-pouic"
-REALNAME = "pas-pouic"
-LEAVE_MSG = "Plop !"
-ADMINS = ["elpouic.users.quakenet.org"]
+NICK = ""
+IDENT = ""
+REALNAME = ""
+LEAVE_MSG = ""
+ADMINS = [""]

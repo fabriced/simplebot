@@ -81,19 +81,15 @@ class fafaIrcBot(object):
                   mask, null, channel = string.split(string.strip(channel), " ", 2)
 
                   try:
-                    res = imp.find_module(methodname)
+                    res = imp.find_module(methodname, ['src/modules'])
+                    msg_type = imp.load_module(methodname, res[0], res[1], res[2])
+                    for i in inspect.getmembers(msg_type):
+                      if i[0] == methodname:
+                        try:
+                          i[1](self, mask, channel, message)
+                        except:
+                          self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (line[2], methodname))
                   except:
                     self.s.send("PRIVMSG %s :unknown command : %s\n" % (line[2],
                                                                     methodname))
-                  # les "fonctions" dans un répertoire modules
-                  msg_type = imp.load_module(methodname, res[0], res[1], res[2])
-
-                  for i in inspect.getmembers(msg_type):
-                    if i[0] == methodname:
-                      try:
-                        i[1](self, mask, channel, message)
-                      except:
-                        self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (line[2], methodname))
-                        import pdb; pdb.set_trace()
-
 
