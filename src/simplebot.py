@@ -8,6 +8,7 @@ import time
 import imp, inspect
 
 from settings import *
+from lib.exception import *
 
 
 class fafaIrcBot(object):
@@ -22,12 +23,12 @@ class fafaIrcBot(object):
 
 
   def say(self, args, place, user= None):
-    print 'PRIVMSG %s :%s\n' % (place, args)
     self.s.send('PRIVMSG %s :%s\n' % (place, args))
 
 
   def send(self, msg):
     self.s.send(msg)
+#    self.s.send("%s\n" % msg)
 
 
   def auth(self, args, place , user):
@@ -36,16 +37,15 @@ class fafaIrcBot(object):
 
   def bot_auth(self):
     pass
-    self.s.send('JOIN #ploooooop.test\n')
 
 
-  def isAdmin(self, host):
+  def is_admin(self, host):
     # return True si l'user est authentifié
     return host.split('@')[-1] in ADMINS
 
 
-  def getUserNick(self, host):
-    return host.split('!')[0][1:]
+  def get_user_nick(self, host):
+    return host.split('!')[0]
 
 
   def main_loop(self):
@@ -77,6 +77,8 @@ class fafaIrcBot(object):
 
                   null, channel, message = string.split(args, ":", 2)
                   mask, null, channel = string.split(string.strip(channel), " ", 2)
+                  if channel == NICK:
+                    channel= self.get_user_nick(mask)
 
                   try:
                     res = imp.find_module(methodname, ['src/modules'])
@@ -85,6 +87,9 @@ class fafaIrcBot(object):
                       if i[0] == methodname:
                         try:
                           i[1](self, mask, channel, message)
+                        except NotAdminError:
+                          user = self.get_user_nick(mask)
+                          self.say("%s :t'as pas le droit\n" % user, user)
                         except:
                           self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (line[2], methodname))
                   except:
