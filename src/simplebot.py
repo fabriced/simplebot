@@ -32,8 +32,6 @@ class fafaIrcBot(object):
 
   def auth(self, args, place , user):
     # permet d'acquerir les droits d'admin du bot
-    # stock l'host de l'user dans un tableau
-    # utiliser des hash md5 sur le passe
     pass
 
   def bot_auth(self):
