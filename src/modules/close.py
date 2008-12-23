@@ -1,5 +1,7 @@
 import sys
 
+from lib.exception import *
+
 LEAVE_MSG = 'bip'
 
 class close(object):
@@ -8,3 +10,5 @@ class close(object):
       main.send('QUIT %s\n' % LEAVE_MSG)
       main.s.close()
       sys.exit(0)
+    else:
+      raise NotAdminError
