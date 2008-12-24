@@ -89,7 +89,7 @@ class fafaIrcBot(object):
                           i[1](self, mask, channel, message)
                         except NotAdminError:
                           user = self.get_user_nick(mask)
-                          self.say("%s :t'as pas le droit\n" % user, user)
+                          self.say("%s: t'as pas le droit\n" % user, user)
                         except:
                           self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (line[2], methodname))
                   except:
