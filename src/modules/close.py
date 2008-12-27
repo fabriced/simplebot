@@ -1,8 +1,9 @@
 import sys
 
+
+from settings import LEAVE_MSG
 from lib.exception import *
 
-LEAVE_MSG = 'bip'
 
 class close(object):
   def __init__(self, main, mask, channel, message):
