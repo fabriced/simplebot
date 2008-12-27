@@ -91,8 +91,8 @@ class fafaIrcBot(object):
                           user = self.get_user_nick(mask)
                           self.say("%s: t'as pas le droit\n" % user, user)
                         except:
-                          self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (line[2], methodname))
+                          self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (channel, methodname))
                   except:
-                    self.s.send("PRIVMSG %s :unknown command : %s\n" % (line[2],
+                    self.s.send("PRIVMSG %s :unknown command : %s\n" % (channel,
                                                                     methodname))
 
