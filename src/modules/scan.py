@@ -31,14 +31,21 @@ class scan(object):
     self.main = main
     self.user = get_nick(mask)
     self.channel = self.user
-    serv = message.split()
-    if len(serv) > 1:
-      if serv[1] in server_dict.keys():
-        self.give_stat(serv[1])
+    request_list = message.split()[1:]
+    if not request_list:
+      request_list = server_dict.keys()
+
+
+    failed = []
+    success = True
+    for r in request_list:
+      if r in server_dict.keys():
+        self.give_stat(r)
       else:
-        self.usage(self.user)
-    else:
-      self.usage(self.user)
+        failed.append(r)
+        success = False
+    if not success:
+      self.main.say('echec pour %s' % ','.join(failed), self.channel)
 
 
 
@@ -58,8 +65,9 @@ class scan(object):
 
     q = PyQuake3(ip, rcon_password='')
     q.update()
-    self.main.say('%s   %s    map %s    with %s player(s).' %
-                          ( q.get_address(),
+    self.main.say('%s -> %s   %s    map %s    with %s player(s).' %
+                         (q3server,
+                          q.get_address(),
                           q.vars['sv_hostname'],
                           q.vars['mapname'],
                           len(q.players)),
