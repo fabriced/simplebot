@@ -1,5 +1,7 @@
 #*-* Coding: UTF-8 *-*
 
+import time
+
 from settings import *
 from lib.pyquake3 import *
 
@@ -79,3 +81,4 @@ class scan(object):
                              player.frags,player.ping),
                       self.channel
                       )
+    time.sleep(1)
