@@ -4,29 +4,13 @@ import time
 
 from settings import *
 from lib.pyquake3 import *
-
-server_dict = {'pub':'88.191.26.51:27960',
-               '1v1':'88.191.26.51:27961',
-               'ctf':'88.191.26.51:27962',
-               'dm6_1':'88.191.26.51:27963',
-               'df_1':'88.191.26.51:27964',
-               'dm6_2':'88.191.26.51:27965',
-               'rox':'88.191.26.51:27966',
-               'dm6_3':'88.191.26.51:27967',
-               'df_2':'88.191.26.51:27968',
-               }
+from lib.utils import  get_nick
 
 
 def format_nick(nick):
-  """ format players nicknames to remove color infos """
+  """ format Quake 3 players nicknames to remove color infos """
   p = re.compile( '\^.')
   return p.sub('',nick)
-
-
-def get_nick(host):
-  return host.split("!")[0]
-
-
 
 class scan(object):
   def __init__(self, main, mask, channel, message):
@@ -81,4 +65,5 @@ class scan(object):
                              player.frags,player.ping),
                       self.channel
                       )
+
     time.sleep(1)
