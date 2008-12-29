@@ -74,25 +74,26 @@ class fafaIrcBot(object):
               if len(line[3]) > 1:
                 if line[3][1] == '!':
                   methodname = line[3][2:]
+                  if methodname:
 
-                  null, channel, message = string.split(args, ":", 2)
-                  mask, null, channel = string.split(string.strip(channel), " ", 2)
-                  if channel == NICK:
-                    channel= self.get_user_nick(mask)
+                    null, channel, message = string.split(args, ":", 2)
+                    mask, null, channel = string.split(string.strip(channel), " ", 2)
+                    if channel == NICK:
+                      channel= self.get_user_nick(mask)
 
-                  try:
-                    res = imp.find_module(methodname, ['src/modules'])
-                    msg_type = imp.load_module(methodname, res[0], res[1], res[2])
-                    for i in inspect.getmembers(msg_type):
-                      if i[0] == methodname:
-                        try:
-                          i[1](self, mask, channel, message)
-                        except NotAdminError:
-                          user = self.get_user_nick(mask)
-                          self.say("%s: t'as pas le droit\n" % user, user)
-                        except:
-                          self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (channel, methodname))
-                  except:
-                    self.s.send("PRIVMSG %s :unknown command : %s\n" % (channel,
-                                                                    methodname))
+                    try:
+                      res = imp.find_module(methodname, ['src/modules'])
+                      msg_type = imp.load_module(methodname, res[0], res[1], res[2])
+                      for i in inspect.getmembers(msg_type):
+                        if i[0] == methodname:
+                          try:
+                            i[1](self, mask, channel, message)
+                          except NotAdminError:
+                            user = self.get_user_nick(mask)
+                            self.say("%s: t'as pas le droit\n" % user, user)
+                          except:
+                            self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (channel, methodname))
+                    except:
+                      self.s.send("PRIVMSG %s :unknown command : %s\n" % (channel,
+                                                                      methodname))
 
