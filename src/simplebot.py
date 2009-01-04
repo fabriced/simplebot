@@ -73,11 +73,12 @@ class fafaIrcBot(object):
             if len(line) > 3:
               if len(line[3]) > 1:
                 if line[3][1] == '!':
-                  methodname = line[3][2:]
+                  methodname = line[3][2:].replace('!','')
                   if methodname:
 
                     null, channel, message = string.split(args, ":", 2)
                     mask, null, channel = string.split(string.strip(channel), " ", 2)
+                    user = self.get_user_nick(mask)
                     if channel == NICK:
                       channel= self.get_user_nick(mask)
 
@@ -89,11 +90,9 @@ class fafaIrcBot(object):
                           try:
                             i[1](self, mask, channel, message)
                           except NotAdminError:
-                            user = self.get_user_nick(mask)
                             self.say("%s: t'as pas le droit\n" % user, user)
                           except:
                             self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (channel, methodname))
                     except:
-                      self.s.send("PRIVMSG %s :unknown command : %s\n" % (channel,
-                                                                      methodname))
+                      self.s.send("PRIVMSG %s :unknown command : %s\n" % (self.get_user_nick(mask), methodname))
 
