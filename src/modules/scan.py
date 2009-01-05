@@ -59,5 +59,6 @@ class scan(object):
                           len(q.players)),
                           self.channel
                       )
-    self.main.say('%s' % ' '.join([format_nick(p.name) for p in q.players]), self.channel)
+    if q.players:
+      self.main.say('%s' % ' '.join([format_nick(p.name) for p in q.players]), self.channel)
     time.sleep(1)
