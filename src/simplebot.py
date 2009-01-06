@@ -65,6 +65,10 @@ class fafaIrcBot(object):
             self.s.send("PONG %s\n" % line[1])
 
         if len(line) > 1:
+          if line[0] == 'ERROR':
+            # ERROR :Closing Link: pouhic by stockholm.se.quakenet.org (Excess Flood)
+            self.s.close()
+            self.__init__()
           if line [1] == 'MODE':
             if line [3] == '+i':
               self.bot_auth()
