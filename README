@@ -12,8 +12,7 @@ is supposed to handle a specific command.
 INSTALLING / USAGE
 ------------------
 
-Please see the docs/xqfdocs.html file for more information.
-
+Edit settings.py then run make from the root folder
 
 AVAILABILITY
 ------------
