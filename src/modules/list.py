@@ -9,6 +9,8 @@ class list(object):
     self.user = get_nick(mask)
     self.channel = self.user
     self.main = main
-    self.main.say('%s' % ', '.join(server_dict.keys()), self.channel )
+    liste = server_dict.keys()
+    liste.sort()
+    self.main.say('%s' % ', '.join(liste), self.channel )
 
 
