@@ -36,6 +36,8 @@ class fafaIrcBot(object):
     pass
 
   def bot_auth(self):
+    for channel in CHANNELS:
+      self.s.send("JOIN %s\n" % channel)
     pass
 
 
@@ -49,6 +51,18 @@ class fafaIrcBot(object):
 
 
   def main_loop(self):
+    self.nb_loop = 0
+    while 1:
+      if self.nb_loop > 0:
+        self.__init__()
+      self.nb_loop += 1
+      try:
+        self.loop()
+      except socket.error:
+        # rooh, encore floodé
+        pass
+
+  def loop(self):
     while 1:
       self.readbuffer = self.s.recv(1024)
       temp = string.split(self.readbuffer, "\n")
