@@ -1,9 +1,11 @@
-from lib.exception import *
+# -*- coding : utf-8 -*- 
 
-class part(object):
-  def __init__(self, main, mask, channel, message):
-    if message.split()[1:]:
-      if main.is_admin(mask):
-        main.s.send("PART %s\n" % message.split()[1])
-      else:
-        raise NotAdminError
+from command import command
+
+from lib.decorator import admin_required
+
+class part(command):
+
+  @admin_required
+  def do(self):
+    self.main.s.send("PART %s\n" % self.message.split()[1])
