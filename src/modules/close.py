@@ -11,6 +11,6 @@ class close(command):
 
   @admin_required
   def do(self):
-    main.send('QUIT %s\n' % LEAVE_MSG)
-    main.s.close()
+    self.main.send('QUIT %s\n' % LEAVE_MSG)
+    self.main.s.close()
     sys.exit(0)
