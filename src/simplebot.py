@@ -4,7 +4,6 @@
 import sys
 import socket
 import string
-import time
 import imp, inspect
 
 from settings import *
