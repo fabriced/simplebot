@@ -8,6 +8,7 @@ class join(command):
 
   @admin_required
   def do(self):
-    if self.message.split()[1:]:
-      self.main.s.send("JOIN %s\n" % self.message.split()[1])
-      self.setChannels(self.getChannels().append(self.message.split()[1]))
+    if self.message:
+      for chan in self.message.split():
+        self.main.s.send("JOIN %s\n" % chan)
+        self.setChannels(self.getChannels().append(chan))

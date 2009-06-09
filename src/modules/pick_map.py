@@ -3,33 +3,22 @@
 import re
 import random
 
-from command import command
+from command import multiCommand
 from lib.decorator import admin_required
 
 set_pattern = re.compile('(?P<map>[-_\d\w]+) (?P<coeff>[\d]+)')
 
 class NotMapAdminError(Exception):
-  def __init__(self):
-      pass
+  pass
 
 maps = {'bardok-cpm' : 5, 'pornstar-redemption' : 5, 'pornstar-luckr': 0 }
-map_list = [ 'blabla']
+map_list = ['blabla']
 
 
-class pick_map(command):
-
-  def do(self):
-    method_name, self.message = self.message.split(' ', 1)
-    
-    try:
-      method = self.__getattribute__(method_name)
-      method()
-    except:
-      print "oops"
-    method()
-
-  def plouf(self):
-    print "yahoo"
+class pick_map(multiCommand):
+#
+#  def plouf(self):
+#    print "yahoo"
 
   def get(self):
     phrase = map_list[ random.randint(0, len(map_list) -1)  ]

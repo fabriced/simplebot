@@ -8,7 +8,11 @@ class command(object):
     self.main = main
     self.mask = mask
     self.channel = channel
-    self.message = message
+    try:
+      self.command, self.message = message.split(' ', 1)
+    except ValueError:
+      self.message = None
+      self.command = message
 
     self.do()
     
@@ -23,3 +27,15 @@ class command(object):
   	
   def setAdmins(self, admins):
   	self.admin = admins
+
+
+class multiCommand(command):
+
+  def do(self):
+    try:
+      method_name = self.message.split()[0]
+      method = self.__getattribute__(method_name)
+      method()
+    except:
+      print "oops"
+

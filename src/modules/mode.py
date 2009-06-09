@@ -7,5 +7,4 @@ class mode(command):
 
   @admin_required
   def do(self):
-    phrase = " ".join(self.message.split()[1:])
-    self.main.send('MODE %s\n' %  phrase) 
+    self.main.send('MODE %s\n' % self.message) 

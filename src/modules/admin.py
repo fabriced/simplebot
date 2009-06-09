@@ -5,6 +5,7 @@ from lib.utils import  get_nick
 from lib.decorator import admin_required
 
 class admin(command):
+#TODO faire heriter de multiCommand, updater self.message ...
 
   @admin_required
   def do(self):

@@ -4,6 +4,7 @@ from settings import *
 from lib.utils import get_nick
 
 class list(object):
+#TODO make it "command" compliant
 
   def __init__(self, main, mask, channel, message):
     self.user = get_nick(mask)

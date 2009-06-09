@@ -28,7 +28,7 @@ class scan(command):
     user = get_nick(self.mask)
     self.channel = user
 
-    request_list = self.message.split()[1:]
+    request_list = self.message.split()
     if not request_list:
       request_list = server_dict.keys()
 
