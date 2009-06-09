@@ -4,4 +4,4 @@ def get_nick(host):
   return host.split("!")[0]
   
 def is_onchan(nick, channel = None):
-	return true
+	return True
