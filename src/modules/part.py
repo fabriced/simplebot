@@ -9,3 +9,4 @@ class part(command):
   @admin_required
   def do(self):
     self.main.s.send("PART %s\n" % self.message.split()[1])
+    self.setChannels(self.getChannels().remove(self.message.split()[1]))

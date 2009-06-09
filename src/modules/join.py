@@ -10,3 +10,4 @@ class join(command):
   def do(self):
     if self.message.split()[1:]:
       self.main.s.send("JOIN %s\n" % self.message.split()[1])
+      self.setChannels(self.getChannels().append(self.message.split()[1]))
