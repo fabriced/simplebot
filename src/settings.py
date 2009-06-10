@@ -1,12 +1,12 @@
 
 HOST = "irc.quakenet.org"
 PORT = 6667
-NICK = "pouhic"
-IDENT = "pas-pouic"
-REALNAME = "pas-pouic"
+NICK = "super-pouhic"
+IDENT = "super-pouic"
+REALNAME = "super-pouic"
 LEAVE_MSG = "pwet"
-ADMINS = ["elpouic.users.quakenet.org", "JeanClaude.users.quakenet.org",'fabrice.pimentech.net']
-CHANNELS = ['#lanvegas']
+ADMINS = ["skuizh.users.quakenet.org"]
+CHANNELS = ['#lvs.mm2','#skuizh']
 
 server_dict = {
                'pub' :  ('q3', '88.191.79.170:27960'),
