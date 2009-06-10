@@ -11,7 +11,7 @@ class map(command):
   """ cherche jusque 5 maps sur q3a.ath.cx et retourne les liens correspondant """
 
   def do(self):
-    for map in self.message.split()[1:]:
+    for map in self.message.split():
       data = urllib.urlencode({"map" : map, "fo" : "" })
       f = urllib.urlopen("http://q3a.ath.cx/index.php", data)
       result= f.read()

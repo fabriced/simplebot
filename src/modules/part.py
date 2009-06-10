@@ -7,11 +7,6 @@ class part(command):
 
   @admin_required
   def do(self):
-    print self.channel
-    if len(self.message.split(None, 1))>1:
-      chan = self.message.split()[1]
-    else:
-      chan = self.channel
-    self.main.s.send("PART %s\n" % chan)
-    self.setChannels(self.getChannels().remove(chan))
-      
+    for chan in self.message.split():
+      self.main.s.send("PART %s\n" % chan)
+      self.setChannels(self.getChannels().remove(chan))

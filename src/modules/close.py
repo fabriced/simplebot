@@ -1,11 +1,10 @@
+# -*- coding: utf-8 -*-
 import sys
-
 
 from settings import LEAVE_MSG
 from command import command
 
 from lib.decorator import admin_required
-
 
 class close(command):
 
