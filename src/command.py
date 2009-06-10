@@ -10,7 +10,7 @@ class command(object):
     self.channel = channel
     try:
       self.command, self.message = message.split(' ', 1)
-    except ValueError:
+    except ValueError, AttributeError:
       self.message = None
       self.command = message
 
