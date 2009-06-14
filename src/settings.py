@@ -6,7 +6,8 @@ IDENT = "super-pouic"
 REALNAME = "super-pouic"
 LEAVE_MSG = "pwet"
 ADMINS = ["skuizh.users.quakenet.org"]
-CHANNELS = ['#lvs.mm2','#skuizh']
+CHANNELS = ['#lanvegas']
+MODPATH = "src/modules/"
 
 server_dict = {
                'pub' :  ('q3', '88.191.79.170:27960'),
