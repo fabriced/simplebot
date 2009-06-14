@@ -5,6 +5,7 @@ import sys
 import socket
 import string
 import imp, inspect
+import glob, os
 
 from settings import *
 from lib.exception import *
@@ -19,7 +20,10 @@ class fafaIrcBot(object):
     self.s.send("USER %s %s bla :%s\n" % (IDENT, HOST, REALNAME))
     self.readbuffer=""
     self.canplop = False
+    self.modpath = MODPATH
 
+  def get_modpath(self):
+    return self.modpath
 
   def say(self, args, place, user= None):
     self.s.send('PRIVMSG %s :%s\n' % (place, args))
@@ -47,6 +51,16 @@ class fafaIrcBot(object):
 
   def get_user_nick(self, host):
     return host.split('!')[0]
+    
+  def recognize_cmd(self, command, path):
+    if glob.glob(path + command + '.py'):
+      return command
+    else:
+      for file in glob.glob(path + command[0] + '*.py'):
+        if len(command) > len(file)-len(path + '.py')-2 and len(command) < len(file)-len(path + '.py')+2:
+          print "current file is: " + file
+          return file[len(path):-len('.py')]
+    return command
 
 
   def main_loop(self):
@@ -98,9 +112,9 @@ class fafaIrcBot(object):
                     user = self.get_user_nick(mask)
                     if channel == NICK:
                       channel= self.get_user_nick(mask)
-
+                    methodname = self.recognize_cmd(methodname, self.modpath)
                     try:
-                      res = imp.find_module(methodname, ['src/modules'])
+                      res = imp.find_module(methodname, [self.modpath])
                       msg_type = imp.load_module(methodname, res[0], res[1], res[2])
                       for i in inspect.getmembers(msg_type):
                         if i[0] == methodname:
@@ -109,6 +123,8 @@ class fafaIrcBot(object):
                           except NotAdminError:
                             self.say("%s: t'as pas le droit\n" % user, user)
                           except:
+                            print "Unexpected error:", sys.exc_info()[0]
+                            print sys.exc_info()[1]
                             self.s.send("PRIVMSG %s :La commande a echoue : %s\n" % (channel, methodname))
                     except:
                       self.s.send("PRIVMSG %s :unknown command : %s\n" % (self.get_user_nick(mask), methodname))
