@@ -10,3 +10,6 @@ def admin_required(func):
     else:
       raise NotAdminError
   return check_admin
+
+# autre decorateur pour faire la meme chose, mais avec un autre nom
+devel = admin_required
