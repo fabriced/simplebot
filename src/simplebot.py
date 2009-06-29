@@ -112,7 +112,7 @@ class fafaIrcBot(object):
                     user = self.get_user_nick(mask)
                     if channel == NICK:
                       channel= self.get_user_nick(mask)
-                    methodname = self.recognize_cmd(methodname, self.modpath)
+                    # methodname = self.recognize_cmd(methodname, self.modpath)
                     try:
                       res = imp.find_module(methodname, [self.modpath])
                       msg_type = imp.load_module(methodname, res[0], res[1], res[2])
