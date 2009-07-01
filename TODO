@@ -1,4 +1,4 @@
-- make a command to display a sort or fulez, rulez could be written in docstrings
-- harrass ze chaporon till he fix some things
+- make a command to display a sort of rules, rules could be written in docstrings
 - eg : make the wiki cmd test for 404 status
-- stop doing things drunk
+- fetch and display news from a website
+http://codemark.tuxfamily.org/parser-un-fichier-rss-atom-en-python/
