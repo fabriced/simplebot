@@ -21,9 +21,16 @@ class fafaIrcBot(object):
     self.readbuffer=""
     self.canplop = False
     self.modpath = MODPATH
+    self.realhost = HOST
 
   def get_modpath(self):
     return self.modpath
+    
+  def get_realhost(self):
+    return self.realhost
+    
+  def get_socket(self):
+    return self.s
 
   def say(self, args, place, user= None):
     self.s.send('PRIVMSG %s :%s\n' % (place, args))
@@ -43,11 +50,28 @@ class fafaIrcBot(object):
       self.s.send("JOIN %s\n" % channel)
     pass
 
+  def is_onquakenet(self):
+    return HOST == "irc.quakenet.org"
+      
+  def is_auth_onquakenet(self, nick):
+    self.send('whois %s\n' % nick) 
+
+    readbuffer = self.s.recv(1024)
+    temp = string.split(readbuffer, "\n")
+    readbuffer = temp.pop()
+
+    for line in temp:
+      line = string.rstrip(line)
+      line = line.split(None,4)
+      authmsg = line[4].split(None, 1)      
+      if len(authmsg) > 1:
+        if authmsg[1] == ':is authed as':
+          return authmsg[0]
+    return False
 
   def is_admin(self, host):
     # return True si l'user est authentifié
     return host.split('@')[-1] in ADMINS
-
 
   def get_user_nick(self, host):
     return host.split('!')[0]
@@ -90,12 +114,14 @@ class fafaIrcBot(object):
         if len(line) > 0:
           if line[0] == "PING":
             self.s.send("PONG %s\n" % line[1])
+            self.realhost = line[1]
 
         if len(line) > 1:
           if line[0] == 'ERROR':
             # ERROR :Closing Link: pouhic by stockholm.se.quakenet.org (Excess Flood)
             self.s.close()
             self.__init__()
+            
           if line [1] == 'MODE':
             if line [3] == '+i':
               self.bot_auth()
@@ -112,14 +138,14 @@ class fafaIrcBot(object):
                     user = self.get_user_nick(mask)
                     if channel == NICK:
                       channel= self.get_user_nick(mask)
-                    methodname = self.recognize_cmd(methodname, self.modpath)
+                    # methodname = self.recognize_cmd(methodname, self.modpath)
                     try:
                       res = imp.find_module(methodname, [self.modpath])
                       msg_type = imp.load_module(methodname, res[0], res[1], res[2])
                       for i in inspect.getmembers(msg_type):
                         if i[0] == methodname:
                           try:
-                            i[1](self, mask, channel, message)
+                            i[1](self, mask, channel, message.strip())
                           except NotAdminError:
                             self.say("%s: t'as pas le droit\n" % user, user)
                           except:

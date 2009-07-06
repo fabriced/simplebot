@@ -7,7 +7,8 @@ REALNAME = "realname"       # realname bot
 LEAVE_MSG = ""              # leaving message bot
 ADMINS = ""                 # list of admins eg: ["nick1.users.quakenet.org","nick2.users.quakenet.org"]
 CHANNELS = ""               # list of channel to autojoin eg: ['#lanvegas','#doom3']
-MODPATH = ""                # absolute or relative path to src/modules/
+MODPATH = ""                # absolute or relative path to module path (eg : src/modules/)
+DBPATH = ""					# absolute or relative path to sqlite3 database
 
 server_dict = None
 
