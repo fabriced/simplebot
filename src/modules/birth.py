@@ -37,7 +37,7 @@ def date_to_timestamp(date):
 
 class birth(command):
   def do(self):
-    if !DBPATH or DBPATH == '':
+    if not DBPATH or DBPATH == '':
       user = self.main.get_user_nick(self.mask)
       self.channel = user
       self.main.say('%s est mal configuré, veuillez contacter son administrateur' % NICK, self.channel)
@@ -94,21 +94,25 @@ class birth(command):
       else:
         conn = sqlite3.connect(DBPATH+'simplebot.sqlite3')
         c = conn.cursor()
-        c.execute('SELECT SU.last_nick FROM simplebot_birthday SB, simplebot_users SU WHERE SU.idUser=SB.idUser AND strftime(\'%d-%m\', SB.birthday, \'unixepoch\') = strftime(\'%d-%m\', current_date)')
+        c.execute('SELECT SU.last_nick, strftime("%Y", SB.birthday, "unixepoch") FROM simplebot_birthday SB, simplebot_users SU WHERE SU.idUser=SB.idUser AND strftime(\'%d-%m\', SB.birthday, \'unixepoch\') = strftime(\'%d-%m\', datetime("now","localtime"))')
         birth = c.fetchall()
         if len(birth) > 0:
-          if len(birth) > 1:
-            nick = str(birth[0][0])
-            i = 1
-            while i < len(birth):
-              if i+1 == len(birth):
-                nick = ' et à ' + str(birth[i][0])
-              else:
-                nick = nick + ', à ' + str(birth[i][0])
-              i = i + 1
-          else:
-            nick = str(birth[0][0])
-          self.main.say('Joyeux anniversaire à %s' % nick, self.channel) 
+          annee = int(time.strftime('%Y', time.localtime()))
+          chaine = ', à'.join(['%s (%s ans)' % (b[0], annee - int(b[1])) for b in birth ])
+#          if len(birth) > 1:
+#            nick = str(birth[0][0])
+#            annee = int(birth[0][1])
+#            i = 1
+#            while i < len(birth):
+#              if i+1 == len(birth):
+#                nick = ' et à ' + str(birth[i][0])
+#              else:
+#                nick = nick + ', à ' + str(birth[i][0])
+#              i = i + 1
+#          else:
+#            nick = str(birth[0][0])
+          ret = chaine.encode('iso-8859-1', 'replace')
+          self.main.say('Joyeux anniversaire à %s' % ret, self.channel) 
           c.close()
           return True
         
