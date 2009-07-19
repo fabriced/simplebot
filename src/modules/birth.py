@@ -45,7 +45,7 @@ class birth(command):
     if self.main.is_onquakenet():
       if self.message and self.message.strip() == 'me':
         auth = self.main.is_auth_onquakenet(self.channel)
-        conn = sqlite3.connect(DBPATH+'simplebot.sqlite3')
+        conn = sqlite3.connect(DBPATH)
         c = conn.cursor()
         c.execute('SELECT SB.birthday FROM simplebot_users SU, simplebot_birthday SB WHERE SU.idUser = SB.idUser AND SU.auth LIKE \''+auth+'\'')
         idUser = c.fetchone()
@@ -62,7 +62,7 @@ class birth(command):
         print auth
         if auth:
           if is_date(self.message):
-            conn = sqlite3.connect(DBPATH+'simplebot.sqlite3')
+            conn = sqlite3.connect(DBPATH)
             c = conn.cursor()
             c.execute('SELECT idUser FROM simplebot_users WHERE auth LIKE \''+auth+'\'')
             idUser = c.fetchone()
@@ -92,7 +92,7 @@ class birth(command):
         else:
           self.main.say('Vous devez être authentifié sur Quakenet pour pouvoir ajouter votre anniversaire', self.channel)
       else:
-        conn = sqlite3.connect(DBPATH+'simplebot.sqlite3')
+        conn = sqlite3.connect(DBPATH)
         c = conn.cursor()
         c.execute('SELECT SU.last_nick, strftime("%Y", SB.birthday, "unixepoch") FROM simplebot_birthday SB, simplebot_users SU WHERE SU.idUser=SB.idUser AND strftime(\'%d-%m\', SB.birthday, \'unixepoch\') = strftime(\'%d-%m\', datetime("now","localtime"))')
         birth = c.fetchall()

@@ -8,7 +8,7 @@ LEAVE_MSG = ""              # leaving message bot
 ADMINS = ""                 # list of admins eg: ["nick1.users.quakenet.org","nick2.users.quakenet.org"]
 CHANNELS = ""               # list of channel to autojoin eg: ['#lanvegas','#doom3']
 MODPATH = ""                # absolute or relative path to module path (eg : src/modules/)
-DBPATH = ""					# absolute or relative path to sqlite3 database
+DBPATH = ""					# absolute or relative sqlite3 database file path (eg : src/simplebot.sqlite3)
 
 server_dict = None
 
