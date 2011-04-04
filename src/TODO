@@ -1,0 +1,58 @@
+MODULES TESTES:
+clock
+close
+google
+join
+mode
+part
+say
+scan
+wiki
+
+MODULES NON TESTES:
+action
+admin
+list
+
+
+MODULES DISABLED:
+birth
+lien
+map
+pick_map
+plop
+spam
+
+NEW MODULE:
+!ignore
+
+!news
+# !news [start]
+# !news stop
+# !news [name|url]
+# !news update
+
+!scorebot
+# !scorebot [start] <ip> [start] // facultatif
+# !scorebot [stop] <ip> [stop]
+# !scorebot [status] <ip> [status]
+
+!ech
+^ ajouter le timer 30 min
+
+!scorebot <server> /* usage perso ou channel if op */
+!scorebot on /* if OP */
+!scorebot list /* affiche tous les scorebots suivis sur le #chan */
+
+
+!news /* liste les derniers events */
+FFF + QW.nu + 'Youpi, Jean_Claude a fait un beau dessin sur son blog !'
+
+TODO:
+!scan <ip>
+
+!scan <-- ajouter le mode du serveur
+
+TEST:
+!clear #channel
+

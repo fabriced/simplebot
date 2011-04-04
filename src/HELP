@@ -1,0 +1,132 @@
+AIDE:
+
+!help
+/* donne un lien vers ce document */
+
+
+!scan
+/* permet de scanner les serveurs, en donnant la map et le nom des joueurs présents */
+
+Usage:
+!scan [type]
+
+Exemples:
+    !scan
+    !scan duel
+    !scan tdm
+
+
+!ech
+/* permet de gérer les demandes de parties */
+
+Usage:
+!ech [add|rm|list[ready|clear] [options]
+
+Exemples:
+    Note: toutes les commandes fonctionnent sans le prefix !ech
+                exemple : !ech add tdm est équivalent à !add tdm
+    - Créer un évènement duel (le jeu par défaut dépend du channel courant)
+    !add duel
+    - Créer un évènement duel pour le jeu qw
+    !add qw duel
+    - Retire son nom de la liste d'attente pour duel sur le chan courant
+    !rm duel
+    - Retire son nom de toutes les listes sur le chan courant
+    !rm
+    - Liste les différents évènements en attente
+    !list
+    - Démarre l'évènement si on en est le possésseur
+    !ready tdm
+    - Supprime toutes les files d'attente du channel (nécessite un droit administrateur)
+    !clear
+
+
+!news
+/* petit bot rss */
+
+Usage:
+!news [start|stop|update]
+
+Exemples:
+    - Liste toutes les news en mémoire dans le bot en mp
+    !news
+    - Démarre l'aggrégateur (nécessite un droit administrateur)
+    !news start
+    - Arrete l'aggrégateur (nécessite un droit administrateur)
+    !news stop
+    - Actualise manuellement les flux
+    !news update
+
+
+!scorebot
+/* todo */
+
+!clock
+/* affiche l'heure courante */
+
+
+!google [recherche]
+/* donne un lien de recherche vers google */
+
+Exemple:
+    !google quakeworld affichera http://www.google.com/search?q=quakeworld
+
+
+!wiki [recherche]
+/* donne un lien de recherche vers wikipedia */
+
+Exemple:
+    !wiki quakeworld affichera http://fr.wikipedia.org/wiki/Special:Recherche?search=quakeworld
+
+
+Commandes administrateurs:
+
+!config
+
+Usage:
+!config [type [action [valeur]]]
+
+Exemples:
+    - Liste les types disponibles
+    !config
+    - Liste les serveurs disponibles dans le bot
+    !config servers
+    - Ajoute le serveur 127.0.0.1 dans le bot
+    !config server add qw|127.0.0.1
+    - Retire le serveur 127.0.0.1 du bot
+    !config server rm qw|127.0.0.1
+
+
+!say #channel message
+/* faire dire quelque chose au bot */
+
+Exemple:
+    !say #qw.fr coucou
+
+
+!mode mode
+/* ajoute un mode */
+
+Exemple:
+    !mode +x
+
+
+!join #channel
+/* rejoint le #channel */
+
+Exemple:
+    !join #qw.fr
+
+
+!part #channel
+/* quitte le #channel */
+
+Exemple:
+    !part #qw.fr
+
+
+!close
+/* quitte le serveur */
+
+
+
