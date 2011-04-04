@@ -5,10 +5,9 @@
 from command import command
 
 class wiki(command):
-  def do(self):
-    if self.message:
-      self.main.say('http://fr.wikipedia.org/wiki/Special:Recherche?search=%s' % self.message.replace(' ', '+'), self.channel)
-    else:
-      self.main.say('http://fr.wikipedia.org', self.channel)
-  def help(self):
-    self.main.say('help!', self.channel)
+    def __call__(self):
+        if self.message:
+            self.server.say('http://fr.wikipedia.org/wiki/Special:Recherche?search=%s' % self.message.replace(' ', '+'), self.channel)
+        else:
+            self.server.say('http://fr.wikipedia.org', self.channel)
+

@@ -1,41 +1,19 @@
 # -*- coding: utf-8 -*-
 from settings import *
+from lib.utils import get_nick
 
 class command(object):
-  chan = CHANNELS
-  admin = ADMINS
-  def __init__(self, main, mask, channel, message):
-    self.main = main
-    self.mask = mask
-    self.channel = channel
-    try:
-      self.command, self.message = message.split(' ', 1)
-    except ValueError, AttributeError:
-      self.message = None
-      self.command = message
-
-    self.do()
-    
-  def getChannels(self):
-  	return self.chan
-  	
-  def getAdmins(self):
-  	return self.admin
-  	
-  def setChannels(self, chans):
-  	self.chan = chans
-  	
-  def setAdmins(self, admins):
-  	self.admin = admins
-
-
-class multiCommand(command):
-
-  def do(self):
-    try:
-      method_name = self.message.split()[0]
-      method = self.__getattribute__(method_name)
-      method()
-    except:
-      print "oops"
-
+    def __init__(self, server, event):
+        self.server = server
+        self.event = event
+        
+        self.mask = event.mask
+        # self.user = get_nick(self.mask)[1:]
+        self.user = get_nick(self.mask)
+        if event.target == server.nick:
+            self.channel = self.user
+        else:
+            self.channel = event.target
+        self.message = " ".join(event.message.split()[1:])
+        self.cmd = event.cmd
+        self.responses = []

@@ -6,9 +6,8 @@ from lib.decorator import admin_required
 
 class join(command):
 
-  @admin_required
-  def do(self):
-    if self.message:
-      for chan in self.message.split():
-        self.main.s.send("JOIN %s\n" % chan)
-        self.setChannels(self.getChannels().append(chan))
+    @admin_required
+    def __call__(self):
+        if self.message:
+            for chan in self.message.split():
+                self.server.send_msg("JOIN %s\n" % chan)
