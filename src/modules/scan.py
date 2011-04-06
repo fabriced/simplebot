@@ -28,7 +28,7 @@ class scan(command):
         user = get_nick(self.mask)
         self.channel = user
 
-        mod_list = ['1v1', '2v2', 'tdm', 'ffa', 'ctf']    
+        mod_list = ['duel', '2v2', 'tdm', 'ffa', 'ctf']    
 
         param = self.message.split(' ')
         if param[0] in ['1v1', 'endif', 'end']:
@@ -68,7 +68,7 @@ class scan(command):
             #    self.server.say('echec pour %s' % self.message, self.channel)
             #    pass
             print 'TODO: !scan ip:port'
-            print 'DEBUG: len(param[0])| '+str(len(param[0]))
+            print 'DEBUG: len(param)| '+str(len(param))
         else:
             # !scan
             
