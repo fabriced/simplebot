@@ -153,7 +153,7 @@ class ech(command):
                             # print 'DEBUG rm %s' % (user)
                             self.ech_dict.get(self.server.host).get(self.channel).get(self.message[1]).get(self.message[2]).remove(user)
                             _del[self.message[1]] = []
-                            if len(self.ech_dict.get(self.server.host).get(self.channel).get(game).get(mode)) == 0:
+                            if len(self.ech_dict.get(self.server.host).get(self.channel).get(self.message[1]).get(self.message[2])) == 0:
                                 # mémorise les branches vides à nettoyer
                                 _del.get(self.message[1]).append(self.message[2])
 
