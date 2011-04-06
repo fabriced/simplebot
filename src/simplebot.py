@@ -134,6 +134,8 @@ class ServerConnection(Thread):
         # commenté pour test offline
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connected = False
+        self.authQ = False
+        self.modeX = False
         tries = 0
         while self.connected == False:
             tries = tries + 1
@@ -169,7 +171,7 @@ class ServerConnection(Thread):
         """ server_forever, or so """
         while self.serve:
             # todo: ping rate average
-            if (int(time.time()) - self.lastping) > 200:
+            if (int(time.time()) - self.lastping) > 600:
                 print 'WARNING: timeout'
                 self.send_msg('QUIT :%s\n' % self.leaveMsg)
                 self.s.shutdown(socket.SHUT_RDWR)
