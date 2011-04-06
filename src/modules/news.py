@@ -11,8 +11,12 @@ from settings import *
 import main
 import threading
 import time
-from feedparser import parse
+# from feedparser import parse
+import lib.feedparser
 from lib.decorator import admin_required
+# from time import mktime
+from datetime import datetime
+
 
 class news(command):
     def __call__(self):
@@ -106,7 +110,8 @@ class news_t(threading.Thread):
             for key, value in self.lastest_dict.iteritems():
                 try:
                     # print '%s[%s] : %s - %s' % (value[0], time.strftime("%d %b %H:%M", time.localtime(key)), value[1], value[2])
-                    self.server.say(u'[%s] %s: %s - %s' % (value[0], time.strftime("%d %b %H:%M", time.localtime(key)), value[1], value[2]), user)
+                    # self.server.say(u'[%s] %s: %s - %s' % (value[0], time.strftime("%d %b %H:%M", time.localtime(key)), value[1], value[2]), user)
+                    self.server.say(u'[%s] %s: %s - %s' % (value[0], datetime.fromtimestamp(mktime(item.updated_parsed)), value[1], value[2]), user)
                 except:
                     # print u'WARNING %s[%s] : %s - %s' % (value[0], time.strftime("%d %b %H:%M", time.localtime(key)), value[1], value[2])
                     print "WARNING: encodage qui foire ?"
@@ -117,7 +122,8 @@ class news_t(threading.Thread):
                 try:
                     # print '!NEWS %s[%s] : %s - %s' % (feed[0], time.strftime("%d %b %H:%M", time.localtime(timestamp)), feed[1], feed[2])
                     # self.server.say(u'[%s] !NEWS %s: %s - %s' % (feed[0], time.strftime("%d %b %H:%M", time.localtime(timestamp)), feed[1], feed[2]), channel)
-                    self.server.say(u'[%s] %s: %s - %s' % (feed[0], time.strftime("%d %b %H:%M", time.localtime(timestamp)), feed[1], feed[2]), channel)
+                    # self.server.say(u'\x034[%s] %s:\x03 %s - %s' % (feed[0], time.strftime("%d %b %H:%M", time.localtime(timestamp)), feed[1], feed[2]), channel)
+                    self.server.say(u'\x034[%s] %s:\x03 %s - %s' % (feed[0], datetime.fromtimestamp(mktime(item.updated_parsed)), feed[1], feed[2]), channel)
                 except:
                     print "WARNING: encodage qui foire ?"
     def update_dict(self, feed, init = False):
